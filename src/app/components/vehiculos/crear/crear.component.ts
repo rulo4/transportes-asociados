@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { VehiculosService } from '../../../vehiculos.service';
 
 @Component({
   selector: 'app-crear',
@@ -7,7 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearComponent implements OnInit {
 
-  constructor() { }
+  ngForm: FormGroup;
+
+  constructor(private vehiculoService: VehiculosService, private formBuilder: FormBuilder) {
+    this.crearForm();
+  }
+
+  crearForm() {
+    this.ngForm = this.formBuilder.group({
+      tipo: [ '', Validators.required ],
+      placas: [ '', Validators.required ],
+      soatfec: [ '', Validators.required ],
+      serviciofec: ['', Validators.required]
+    });
+  }
+
+  crearVehiculo(vehiculo) {
+    this.vehiculoService.crearVehiculo(vehiculo);
+  }
 
   ngOnInit() {
   }

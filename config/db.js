@@ -1,3 +1,3 @@
 module.exports = {
-  db: 'mongodb://localhost:22019/development',
+  db: 'mongodb://taDev:taDevPwd@localhost:22019/development',
 };

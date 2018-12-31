@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+const logger = require('../config/winston');
 const Vehiculo = require('../models/Vehiculo');
 
 router.route('/crear').post((request, response) => {
@@ -10,6 +11,7 @@ router.route('/crear').post((request, response) => {
         response.status(200).json({msj: 'Vehiculo creado'});
       })
       .catch((error) => {
+        logger.error(error);
         response.status(400).json({msj: 'Error al intentar crear vehiculo'});
       });
 });

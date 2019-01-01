@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Vehiculo } from './Vehiculo';
 import { VehiculosService } from '../../../vehiculos.service';
 
@@ -11,11 +12,21 @@ export class InicioComponent implements OnInit {
 
   vehiculos: Vehiculo[] = [];
 
-  constructor(private vehiculosService: VehiculosService) { }
+  constructor(private router: Router, private vehiculosService: VehiculosService) { }
 
   ngOnInit() {
+    this.listarVehiculos();
+  }
+
+  listarVehiculos() {
     this.vehiculosService.listarVehiculos().subscribe((vehiculos: Vehiculo[]) => {
       this.vehiculos = vehiculos['vehiculos'];
+    });
+  }
+
+  eliminarVehiculo(id) {
+    this.vehiculosService.eliminarVehiculo(id).subscribe(response => {
+      this.listarVehiculos();
     });
   }
 }

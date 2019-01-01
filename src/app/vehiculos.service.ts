@@ -16,4 +16,13 @@ export class VehiculosService {
   listarVehiculos() {
     return this.http.get(`${this.uri}`);
   }
+  editarVehiculo(id) {
+    return this.http.get(`${this.uri}/editar/${id}`);
+  }
+  actualizarVehiculo(vehiculo) {
+    return this.http.post(`${this.uri}/actualizar/${vehiculo.id}`, vehiculo);
+  }
+  eliminarVehiculo(id) {
+    return this.http.get(`${this.uri}/eliminar/${id}`);
+  }
 }

@@ -30,7 +30,7 @@ router.route('/editar/:id').get((request, response) => {
   const id = request.params.id;
   Vehiculo.findById(id, (error, vehiculo) => {
     if (error) {
-      console.log(error);
+      logger.error(error);
       response.json({msj: 'Error al intentar obtener datos del vehiculo'});
     }
     response.json(vehiculo);
@@ -47,10 +47,10 @@ router.route('/actualizar/:id').post((request, response) => {
       response.json({msj: 'Vehiculo no encontrado'});
     }
 
-    vehiculo.tipo = request.params.tipo;
-    vehiculo.placas = request.params.placas;
-    vehiculo.soatfec = request.params.soatfec;
-    vehiculo.servciofec = request.params.serviciofec;
+    vehiculo.tipo = request.body.tipo;
+    vehiculo.placas = request.body.placas;
+    vehiculo.soatfec = request.body.soatfec;
+    vehiculo.servciofec = request.body.serviciofec;
     vehiculo.save()
         .then((vehiculo) => {
           response.json('Actualización exitosa');

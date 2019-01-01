@@ -11,7 +11,7 @@ const port = process.env.PORT || 4000;
 const app = express();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.db).then(
+mongoose.connect(config.db, {useNewUrlParser: true}).then(
     ()=> {
       logger.info('Conexión a mongo exitosa'),
       (error)=> {

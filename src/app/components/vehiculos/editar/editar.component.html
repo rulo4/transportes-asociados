@@ -1,3 +1,40 @@
-<p>
-  editar works!
-</p>
+<div class="card">
+  <div class="card-body">
+    <form [formGroup]="ngForm" novalidate>
+      <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <input id="tipo" class="form-control" type="text" formControlName="tipo" #tipo>
+      </div>
+      <div *ngIf="ngForm.controls['tipo'].invalid && (ngForm.controls['tipo'].dirty || ngForm.controls['tipo'].touched)" class="alert alert-danger">
+        <div *ngIf="ngForm.controls['tipo'].errors.required">Campo obligatorio</div>
+      </div>
+
+      <div class="form-group">
+        <label for="placas">Placas</label>
+        <input id="placas" class="form-control" type="text" formControlName="placas" #placas>
+      </div>
+      <div *ngIf="ngForm.controls['placas'].invalid && (ngForm.controls['placas'].dirty || ngForm.controls['placas'].touched)" class="alert alert-danger">
+        <div *ngIf="ngForm.controls['placas'].errors.required">Campo obligatorio</div>
+      </div>
+
+      <div class="form-group">
+        <label for="soatfec">Vencimiento SOAT</label>
+        <input id="soatfec" class="form-control" type="text" formControlName="soatfec" #soatfec>
+      </div>
+      <div *ngIf="ngForm.controls['soatfec'].invalid && (ngForm.controls['soatfec'].dirty || ngForm.controls['soatfec'].touched)" class="alert alert-danger">
+        <div *ngIf="ngForm.controls['soatfec'].errors.required">Campo obligatorio</div>
+      </div>
+
+      <div class="form-group">
+        <label for="serviciofec">Próximo servicio</label>
+        <input id="serviciofec" class="form-control" type="text" formControlName="serviciofec" #serviciofec>
+      </div>
+      <div *ngIf="ngForm.controls['serviciofec'].invalid && (ngForm.controls['serviciofec'].dirty || ngForm.controls['serviciofec'].touched)" class="alert alert-danger">
+        <div *ngIf="ngForm.controls['serviciofec'].errors.required">Campo obligatorio</div>
+      </div>
+      <div class="form-group">
+        <button type="button" (click)="actualizarVehiculo({id: vehiculo._id, tipo: tipo.value, placas: placas.value, soatfec: soatfec.value, serviciofec: serviciofec.value})" [disabled]="ngForm.invalid" class="btn btn-primary">Actualizar Vehículo</button>
+      </div>
+    </form>
+  </div>
+</div>

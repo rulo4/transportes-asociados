@@ -1,3 +1,21 @@
-<p>
-  inicio works!
-</p>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>Tipo</td>
+      <td>Placas</td>
+      <td>Vencimiento de SOAT</td>
+      <td>Próximo servicio</td>
+      <td colspan="2">Acciones</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vehiculo of vehiculos">
+      <td>{{vehiculo.tipo}}</td>
+      <td>{{vehiculo.placas}}</td>
+      <td>{{vehiculo.soatfec}}</td>
+      <td>{{vehiculo.serviciofec}}</td>
+      <td><a [routerLink]="['/vehiculos/editar', vehiculo._id]" class="btn btn-primary">Editar</a></td>
+      <td><a [routerLink]="" class="btn btn-danger">Eliminar</a></td>
+    </tr>
+  </tbody>
+</table>

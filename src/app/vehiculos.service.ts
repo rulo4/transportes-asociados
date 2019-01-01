@@ -13,4 +13,7 @@ export class VehiculosService {
         console.log('Vehículo creado');
       });
   }
+  listarVehiculos() {
+    return this.http.get(`${this.uri}`);
+  }
 }

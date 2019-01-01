@@ -1,5 +1,5 @@
 export interface Vehiculo {
-  id: Number;
+  _id: Number;
   tipo: String;
   placas: String;
   soatfec: String;

@@ -19,7 +19,11 @@
 
       <div class="form-group">
         <label for="soatfec">Vencimiento SOAT</label>
-        <input id="soatfec" class="form-control" type="text" formControlName="soatfec" #soatfec>
+        <div class="input-group">
+          <input name="soatfec" id="soatfec" class="form-control" type="text" formControlName="soatfec" ngbDatepicker #soatfec="ngbDatepicker" placeholder="yyyy-mm-dd">
+          <button type="button" class="btn btn-outline-secondary" (click)="soatfec.toggle()"><fa-icon [icon]="['fas', 'calendar-alt']"></fa-icon>
+          </button>
+        </div>
       </div>
       <div *ngIf="ngForm.controls['soatfec'].invalid && (ngForm.controls['soatfec'].dirty || ngForm.controls['soatfec'].touched)" class="alert alert-danger">
         <div *ngIf="ngForm.controls['soatfec'].errors.required">Campo obligatorio</div>
@@ -27,13 +31,17 @@
 
       <div class="form-group">
         <label for="serviciofec">Próximo servicio</label>
-        <input id="serviciofec" class="form-control" type="text" formControlName="serviciofec" #serviciofec>
+        <div class="input-group">
+            <input name="serviciofec" id="serviciofec" class="form-control" type="text" formControlName="serviciofec" ngbDatepicker #serviciofec="ngbDatepicker" placeholder="yyyy-mm-dd">
+            <button type="button" class="btn btn-outline-secondary" (click)="serviciofec.toggle()"><fa-icon [icon]="['fas', 'calendar-alt']"></fa-icon>
+             </button>
+          </div>
       </div>
       <div *ngIf="ngForm.controls['serviciofec'].invalid && (ngForm.controls['serviciofec'].dirty || ngForm.controls['serviciofec'].touched)" class="alert alert-danger">
         <div *ngIf="ngForm.controls['serviciofec'].errors.required">Campo obligatorio</div>
       </div>
       <div class="form-group">
-        <button type="button" (click)="actualizarVehiculo({id: vehiculo._id, tipo: tipo.value, placas: placas.value, soatfec: soatfec.value, serviciofec: serviciofec.value})" [disabled]="ngForm.invalid" class="btn btn-primary">Actualizar Vehículo</button>
+        <button type="button" (click)="actualizarVehiculo()" [disabled]="ngForm.invalid" class="btn btn-primary">Actualizar Vehículo</button>
       </div>
     </form>
   </div>

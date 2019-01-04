@@ -8,10 +8,7 @@ export class VehiculosService {
   uri = 'http://localhost:4000/vehiculos';
   constructor(private http: HttpClient) { }
   crearVehiculo(vehiculo) {
-    this.http.post(`${this.uri}/crear`, vehiculo)
-      .subscribe(response => {
-        console.log('Vehículo creado');
-      });
+    return this.http.post(`${this.uri}/crear`, vehiculo);
   }
   listarVehiculos() {
     return this.http.get(`${this.uri}`);

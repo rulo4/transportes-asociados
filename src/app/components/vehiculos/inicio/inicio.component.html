@@ -15,7 +15,7 @@
       <td>{{vehiculo.soatfec}}</td>
       <td>{{vehiculo.serviciofec}}</td>
       <td><a [routerLink]="['/vehiculos/editar', vehiculo._id]" class="btn btn-primary">Editar</a></td>
-      <td><a [routerLink]="" class="btn btn-danger">Eliminar</a></td>
+      <td><button type="button" (click)="eliminarVehiculo(vehiculo._id)" class="btn btn-danger">Eliminar</button></td>
     </tr>
   </tbody>
 </table>

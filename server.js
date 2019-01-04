@@ -1,5 +1,4 @@
 const express = require('express');
-// const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -13,9 +12,9 @@ const app = express();
 mongoose.Promise = global.Promise;
 mongoose.connect(config.db, {useNewUrlParser: true}).then(
     ()=> {
-      logger.info('Conexión a mongo exitosa'),
+      logger.info('Conexión a mongo establecida'),
       (error)=> {
-        logger.error('Error al intentar conexión a mongo: %s', error);
+        logger.error(`Error al intentar conexión a mongo: ${error}`);
       };
     }
 );
@@ -24,5 +23,5 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use('/vehiculos', vehiculoRoutes);
 app.listen(port, ()=>{
-  console.info('Escuchando en el puerto %s', port);
+  logger.info(`Escuchando en el puerto ${port}`);
 });

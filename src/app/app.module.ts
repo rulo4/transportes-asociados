@@ -11,8 +11,6 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
-import { VehiculosService } from './vehiculos.service';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CrearComponent } from './components/vehiculos/crear/crear.component';
@@ -40,9 +38,6 @@ import { InicioComponent } from './components/vehiculos/inicio/inicio.component'
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     })
-  ],
-  providers: [
-    VehiculosService
   ],
   bootstrap: [AppComponent]
 })

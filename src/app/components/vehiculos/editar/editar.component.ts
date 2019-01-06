@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment-timezone';
 
 import { Vehiculo } from '../inicio/Vehiculo';
-import { VehiculosService } from '../../../vehiculos.service';
+import { VehiculosService } from '../common/vehiculos.service';
 import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -62,7 +62,12 @@ export class EditarComponent implements OnInit {
     this.route.params.subscribe(params => {
       vehiculo.id = params.id;
       this.vehiculosService.actualizarVehiculo(vehiculo).subscribe(response => {
-        this.router.navigate([ '/vehiculos' ]);
+        if (response['msj']) {
+          
+        }
+        else {
+
+        }
       });
     });
   }

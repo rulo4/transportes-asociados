@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment-timezone';
 import 'moment/min/locales';
 import { ToastrService } from 'ngx-toastr';
-import { VehiculosService } from '../../../vehiculos.service';
+import { VehiculosService } from '../common/vehiculos.service';
 
 @Component({
   selector: 'app-inicio',
@@ -22,26 +22,35 @@ export class InicioComponent implements OnInit {
   }
 
   listarVehiculos() {
-    this.vehiculosService.listarVehiculos().subscribe((vehiculos: any[]) => {
-      if (!vehiculos) {
-        this.toastr.error('Error al intentar obtener lista de vehículos');
-        return;
-      }
-      if (vehiculos.length !== 0) {
-        this.vehiculos = vehiculos.map((v) => {
-          v.soatfec = moment(v.soatfec).format('DD [de] MMM [de] YYYY');
-          v.serviciofec = moment(v.serviciofec).format('DD [de] MMM [de] YYYY');
-          return v;
-        });
-      } else {
-        this.toastr.warning('No hay vehículos para mostrar');
+    this.vehiculosService.listarVehiculos().subscribe({
+      next: response => {
+        const vehiculos = response as any[];
+        if (vehiculos.length !== 0) {
+          this.vehiculos = vehiculos.map((v) => {
+            v.soatfec = moment(v.soatfec).format('DD [de] MMM [de] YYYY');
+            v.serviciofec = moment(v.serviciofec).format('DD [de] MMM [de] YYYY');
+            return v;
+          });
+        } else {
+          this.toastr.warning('No hay vehículos para mostrar');
+          this.vehiculos = [];
+        }
+      },
+      error: response => {
+        this.toastr.error(response.error.err);
       }
     });
   }
 
   eliminarVehiculo(id) {
-    this.vehiculosService.eliminarVehiculo(id).subscribe(response => {
-      this.listarVehiculos();
+    this.vehiculosService.eliminarVehiculo(id).subscribe({
+      next: response => {
+        this.toastr.success(response['msj']);
+        this.listarVehiculos();
+      },
+      error: response => {
+        this.toastr.error(response.error.err);
+      }
     });
   }
 }

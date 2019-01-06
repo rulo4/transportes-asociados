@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV || 'development';
 const options = {
   file: {
     level: env === 'development' ? 'debug' : 'info',
-    filename: 'log/app.log',
+    filename: 'server/log/app.log',
     handleExceptions: true,
     format: format.combine(
         format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),

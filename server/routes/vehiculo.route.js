@@ -22,7 +22,7 @@ router.route('/').get((request, response) => {
     if (error) {
       logger.error(error);
       response.status(500).json({
-        err: `Error al intentar obtener lista de vehiculos: ${error}`,
+        err: `Error al intentar obtener lista de vehículos: ${error}`,
       });
     }
     logger.info('Listando vehículos');

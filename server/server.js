@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const logger = require('./config/log');
 const confBd = require('./config/bd');
 const vehiculoRoutes = require('./routes/vehiculo.route');
+const conductorRoutes = require('./routes/conductor.route');
 const port = process.env.PORT || 4000;
 const app = express();
 
@@ -16,6 +17,7 @@ function iniciarServidor() {
   app.use(cors());
   app.use(bodyParser.json());
   app.use('/vehiculos', vehiculoRoutes);
+  app.use('/conductores', conductorRoutes);
   app.listen(port, ()=>{
     logger.info(`Servidor iniciado, escuchando en el puerto ${port}`);
   });

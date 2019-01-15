@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment-timezone';
 import 'moment/min/locales';
 import { ToastrService } from 'ngx-toastr';
-import { VehiculosService } from '../common/vehiculos.service';
+import { VehiculosService } from '../services/vehiculos.service';
 
 @Component({
   selector: 'app-inicio',

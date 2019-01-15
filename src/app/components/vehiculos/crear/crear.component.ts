@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment-timezone';
 import { ToastrService } from 'ngx-toastr';
-import { VehiculosService } from '../common/vehiculos.service';
+import { VehiculosService } from '../services/vehiculos.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

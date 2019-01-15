@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment-timezone';
 
 import { Vehiculo } from '../inicio/Vehiculo';
-import { VehiculosService } from '../common/vehiculos.service';
+import { VehiculosService } from '../services/vehiculos.service';
 import { NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

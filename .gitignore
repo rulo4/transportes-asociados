@@ -44,3 +44,6 @@ Thumbs.db
 
 #log files
 server/log/*.log
+
+#env files
+.env

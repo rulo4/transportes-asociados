@@ -1,10 +1,9 @@
+require('dotenv').config();
 const {createLogger, format, transports} = require('winston');
-
-const env = process.env.NODE_ENV || 'development';
 
 const options = {
   file: {
-    level: env === 'development' ? 'debug' : 'info',
+    level: process.env.LOG_LEVEL,
     filename: 'server/log/app.log',
     handleExceptions: true,
     format: format.combine(
@@ -16,7 +15,7 @@ const options = {
     colorize: false,
   },
   console: {
-    level: 'development'? 'debug': 'info',
+    level: process.env.LOG_LEVEL,
     handleExceptions: true,
     format: format.combine(
         format.timestamp({format: 'YYYY-MM-DD HH:mm:ss'}),

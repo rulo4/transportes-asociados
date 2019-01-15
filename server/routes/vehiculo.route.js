@@ -8,25 +8,32 @@ router.route('/crear').post((request, response) => {
   const vehiculo = new Vehiculo(request.body);
   vehiculo.save((error, vehiculo) => {
     if (error) {
-      logger.error(error);
-      response.status(500)
-          .json({err: `Error al intentar crear vehiculo: ${error}`});
+      logger.error('Error al intentar crear vehiculo: '
+      + (error._message ? error._message : error.errmsg));
+      response.status(500).json({
+        err: 'Error al intentar crearlo: '
+            + (error._message ? error._message : error.errmsg),
+      });
+    } else {
+      logger.info(`Creado el vehículo con id ${vehiculo._id}`);
+      response.json({msj: 'Creado', vehiculo: vehiculo._id});
     }
-    logger.info(`Creado el vehículo con id ${vehiculo._id}`);
-    response.json({msj: 'Vehiculo creado'});
   });
 });
 
 router.route('/').get((request, response) => {
   Vehiculo.find((error, vehiculos) => {
     if (error) {
-      logger.error(error);
+      logger.error('Error al intentar obtener lista de vehículos:'
+          + ` ${error._message}`);
       response.status(500).json({
-        err: `Error al intentar obtener lista de vehículos: ${error}`,
+        err: `Error al intentar obtener la lista: ${error._message}`,
+        det: error.message,
       });
+    } else {
+      logger.info('Listando vehículos');
+      response.json(vehiculos);
     }
-    logger.info('Listando vehículos');
-    response.json(vehiculos);
   });
 });
 
@@ -34,57 +41,66 @@ router.route('/editar/:id').get((request, response) => {
   const id = request.params.id;
   Vehiculo.findById(id, (error, vehiculo) => {
     if (error) {
-      logger.error(error);
+      logger.error('Error al intentar obtener los datos del vehículo con id '
+          + `${id}: ${error.message}`);
       response.status(500).json({
-        err: `Error al intentar obtener vehículo con id ${id}}]`,
+        err: `Error al intentar obtener los datos: ${error.message}`,
+        det: error.message,
       });
+    } else {
+      logger.info(`Editando el vehículo con id ${id}`);
+      response.json(vehiculo);
     }
-    logger.info(`Editando el vehículo con id ${vehiculo._id}`);
-    response.json(vehiculo);
   });
 });
 
-router.route('/actualizar/:id').post((request, response) => {
+router.route('/actualizar/:id').put((request, response) => {
   const id = request.params.id;
   Vehiculo.findById(request.params.id, (error, vehiculo) => {
     if (error) {
-      logger.error(error);
+      logger.error('Error al intentar obtener vehículo con id '
+          + `${id}: ${error._message}`);
       response.status(500).json({
-        err: `Error al intentar obtener vehículo con id ${id}}]`,
+        err:
+          `Error al intentar obtenerlo: ${error._message}`,
+        det: error.message,
+      });
+    } else {
+      vehiculo.tipo = request.body.tipo;
+      vehiculo.placas = request.body.placas;
+      vehiculo.soatfec = request.body.soatfec;
+      vehiculo.serviciofec = request.body.serviciofec;
+      vehiculo.save((error) => {
+        if (error) {
+          logger.error('Error al intentar actualizar el vehículo con id '
+          + `${id}: ${error._message}`);
+          response.status(500).json({
+            err: `Error al intentar actualizarlo: ${error._message}`,
+            det: error.message,
+          });
+        } else {
+          logger.info(`Actualizado el vehículo con id ${id}`);
+          response.json({msj: 'Actualizado'});
+        }
       });
     }
-    if (!vehiculo) {
-      logger.error(`No encontrado el vehículo con id ${vehiculo._id}`);
-      response.status(500).json({err: 'Vehiculo no encontrado'});
-    }
-
-    vehiculo.tipo = request.body.tipo;
-    vehiculo.placas = request.body.placas;
-    vehiculo.soatfec = request.body.soatfec;
-    vehiculo.serviciofec = request.body.serviciofec;
-    vehiculo.save((error) => {
-      if (error) {
-        logger.error(error);
-        response.status(500).json({
-          err: `Error al intentar actualizar el vehículo con id ${id}`,
-        });
-      }
-      logger.info(`Actualizado el vehículo con id ${vehiculo._id}`);
-      response.json({msj: 'Actualización exitosa'});
-    });
   });
 });
 
-router.route('/eliminar/:id').get((request, response) => {
+router.route('/eliminar/:id').delete((request, response) => {
   const id = request.params.id;
   Vehiculo.findByIdAndRemove({_id: id}, (error) => {
     if (error) {
-      logger.error(error);
-      response.status(500)
-          .json({err: `Error al intentar eliminar vehiculo con id ${id}`});
+      logger.error('Error al intentar eliminar vehiculo con id'
+      + `${id}: ${error._message}`);
+      response.status(500).json({
+        err: `Error al intentar eliminarlo: ${error._message}`,
+        det: error.message,
+      });
+    } else {
+      logger.info(`Eliminado el vehículo con id ${id}`);
+      response.json({msj: 'Eliminado'});
     }
-    logger.info(`Eliminado el vehículo con id ${id}`);
-    response.json({msj: 'Vehiculo eliminado'});
   });
 });
 

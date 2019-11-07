@@ -34,7 +34,7 @@
     "express": "^4.16.4",
     "jquery": "^3.3.1",
     "moment-timezone": "^0.5.23",
-    "mongoose": "^5.4.1",
+    "mongoose": "^5.7.5",
     "ngx-toastr": "^9.1.1",
     "popper.js": "^1.14.6",
     "rxjs": "~6.3.3",
